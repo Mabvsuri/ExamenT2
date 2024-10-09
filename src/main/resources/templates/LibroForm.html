@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Libros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${libro.idLibro != 0} ? 'Editar Libro' : 'Nuevo Libro'"></h1>
+ 
+    <form th:action="@{/saveLibro}" th:object="${libro}" method="post">
+		
+           <input type="hidden" th:field="*{idLibro}" /><div class="form-group">
+			
+            <label for="titulo">Título</label>
+            <input type="text" th:field="*{titulo}" class="form-control" id="titulo" required>
+        </div>
+        <div class="form-group">
+            <label for="nombreAutor">Nombre del Autor</label>
+            <input type="text" th:field="*{nombreAutor}" class="form-control" id="nombreAutor" required>
+        </div>
+        <div class="form-group">
+            <label for="apellidoAutor">Apellido del Autor</label>
+            <input type="text" th:field="*{apellidoAutor}" class="form-control" id="apellidoAutor" required>
+        </div>
+        <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <input type="text" th:field="*{categoria}" class="form-control" id="categoria" required>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="number" th:field="*{precio}" class="form-control" id="precio" required>
+        </div>
+        
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="/listarLibros" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

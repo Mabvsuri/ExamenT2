@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Libros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Listado de Libros</h1>
+    <a href="/nuevoLibro" class="btn btn-primary mb-3">Nuevo Libro</a>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID Libro</th>
+                <th>Título</th>
+                <th>Nombre Autor</th>
+                <th>Apellido Autor</th>
+				<th>Categoría</th>
+				<th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="libro : ${libros}">
+                <td th:text="${libro.idLibro}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.nombreAutor}"></td>
+                <td th:text="${libro.apellidoAutor}"></td>
+				<td th:text="${libro.categoria}"></td>
+				<td th:text="${libro.precio}"></td>
+                <td>
+                    <a th:href="@{/mostrarLibro/{id}(id=${libro.idLibro})}" class="btn btn-info">Ver</a>
+                    <a th:href="@{/libroDelete/{id}(id=${libro.idLibro})}" class="btn btn-danger" 
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar este libro?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

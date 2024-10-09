@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Órdenes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Listado de Órdenes</h1>
+    <a href="/nuevaOrden" class="btn btn-primary mb-3">Nueva Orden</a>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID Orden</th>
+                <th>ID Cliente</th>
+                <th>Títulos de Libros</th>
+                <th>Fecha de Orden</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="orden : ${ordenes}">
+                <td th:text="${orden.idOrden}"></td>
+                <td th:text="${orden.idCliente}"></td>
+                <td>
+                    <ul>
+                        <li th:each="libro : ${orden.libros}" th:text="${libro.titulo}"></li>
+                    </ul>
+                </td>
+                <td th:text="${orden.fechaOrden}"></td>
+                <td>
+                    <a th:href="@{/mostrarOrden/{id}(id=${orden.idOrden})}" class="btn btn-info">Ver</a>
+                    <a th:href="@{/ordenDelete/{id}(id=${orden.idOrden})}" class="btn btn-danger" 
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar esta orden?');">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

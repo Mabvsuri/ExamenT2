@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Órdenes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${orden.idOrden != null} ? 'Editar Orden' : 'Nueva Orden'"></h1>
+    
+    <form th:action="@{/saveOrden}" th:object="${orden}" method="post">
+		
+		<input type="hidden" th:field="*{idOrden}" /><div class="form-group">
+			
+        <div class="form-group">
+            <label for="libros">Libros</label>
+            <select id="libros" class="form-control" name="libroIds" multiple required>
+                <option th:each="libro : ${libros}" 
+                        th:value="${libro.idLibro}" 
+                        th:text="${libro.titulo}" 
+                        th:selected="${orden.libros.contains(libro)}"></option>
+            </select>
+            <small class="form-text text-muted">Mantén presionada la tecla Ctrl (Windows) o Command (Mac) para seleccionar múltiples libros.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="idCliente">ID Cliente</label>
+            <input type="number" th:field="*{idCliente}" class="form-control" id="idCliente" required />
+        </div>
+
+		<div class="form-group">
+		    <label for="fechaOrden">Fecha de Orden</label>
+		    <input type="date" th:field="*{fechaOrden}" class="form-control" id="fechaOrden" required />
+		</div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+</body>
+</html>
